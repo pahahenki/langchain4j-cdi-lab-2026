@@ -6,6 +6,7 @@ import dev.langchain4j.service.AiServices;
 import dev.langchain4j.service.TokenStream;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
@@ -16,12 +17,17 @@ import jakarta.ws.rs.sse.SseEventSink;
 @ApplicationScoped
 public class ChatResource {
 
+    @Inject
     private ChatAssistant assistant;
     private ChatAssistantStreaming streamingAssistant;
 
+
+
     @PostConstruct
     void init() {
-        MistralAiChatModel model = MistralAiChatModel.builder()
+
+        //replace by injection
+       /* MistralAiChatModel model = MistralAiChatModel.builder()
                 .apiKey(System.getenv("MISTRAL_API_KEY"))
                 .modelName("mistral-small-latest")
                 .logRequests(true)
@@ -30,7 +36,7 @@ public class ChatResource {
 
         assistant = AiServices.builder(ChatAssistant.class)
                 .chatModel(model)
-                .build();
+                .build();*/
 
         MistralAiStreamingChatModel streamingModel = MistralAiStreamingChatModel.builder()
                 .apiKey(System.getenv("MISTRAL_API_KEY"))
@@ -41,6 +47,7 @@ public class ChatResource {
                 .streamingChatModel(streamingModel)
                 .build();
     }
+
 
     @POST
     @Consumes(MediaType.TEXT_PLAIN)
