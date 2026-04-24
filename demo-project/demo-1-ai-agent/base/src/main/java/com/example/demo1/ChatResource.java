@@ -19,6 +19,7 @@ public class ChatResource {
 
     @Inject
     private ChatAssistant assistant;
+    @Inject
     private ChatAssistantStreaming streamingAssistant;
 
 
@@ -37,15 +38,15 @@ public class ChatResource {
         assistant = AiServices.builder(ChatAssistant.class)
                 .chatModel(model)
                 .build();*/
-
-        MistralAiStreamingChatModel streamingModel = MistralAiStreamingChatModel.builder()
+        // replace by injection exo 1 parti 2
+/*        MistralAiStreamingChatModel streamingModel = MistralAiStreamingChatModel.builder()
                 .apiKey(System.getenv("MISTRAL_API_KEY"))
                 .modelName("mistral-small-latest")
                 .build();
 
         streamingAssistant = AiServices.builder(ChatAssistantStreaming.class)
                 .streamingChatModel(streamingModel)
-                .build();
+                .build();*/
     }
 
 

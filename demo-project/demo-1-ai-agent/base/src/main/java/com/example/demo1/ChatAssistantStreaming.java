@@ -1,9 +1,11 @@
 package com.example.demo1;
 
+import dev.langchain4j.cdi.spi.RegisterAIService;
 import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.service.TokenStream;
 import dev.langchain4j.service.UserMessage;
 
+@RegisterAIService(streamingChatModelName = "my-streaming-model")
 public interface ChatAssistantStreaming {
 
     @SystemMessage("""
