@@ -17,7 +17,8 @@ import jakarta.ws.rs.core.MediaType;
 public class GameResource {
 
     // TODO: Injecter le CasinoDealerAI avec @Inject
-    // CasinoDealerAI gameMaster;
+    @Inject
+    HnefataflJarlAI hnefataflJarlAI;
 
     /**
      * TODO: Jouer une action dans la partie de Hnefatafl.
@@ -28,7 +29,7 @@ public class GameResource {
     @Produces(MediaType.TEXT_PLAIN)
     public String play(String playerAction) {
         // TODO: Appeler gameMaster.play(playerAction)
-        throw new UnsupportedOperationException("TODO: À implémenter pendant le live coding");
+        return hnefataflJarlAI.play(playerAction);
     }
 
     /**
@@ -39,7 +40,7 @@ public class GameResource {
     @Produces(MediaType.TEXT_PLAIN)
     public String start() {
         // TODO: Retourner gameMaster.play("Salve ! Je suis prêt à jouer au Hnefatafl.")
-        throw new UnsupportedOperationException("TODO: À implémenter pendant le live coding");
+        return hnefataflJarlAI.play("Salve ! Je suis prêt à jouer au Hnefatafl.");
     }
 
     /**

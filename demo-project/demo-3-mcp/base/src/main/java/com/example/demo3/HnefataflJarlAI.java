@@ -5,6 +5,10 @@ package com.example.demo3;
 // import dev.langchain4j.service.SystemMessage;
 // import dev.langchain4j.service.UserMessage;
 
+import dev.langchain4j.cdi.spi.RegisterAIService;
+import dev.langchain4j.service.SystemMessage;
+import dev.langchain4j.service.UserMessage;
+
 /**
  * TODO: Agent IA qui anime un jeu de Hnefatafl au Grand Thing des guerriers du Nord.
  *
@@ -15,6 +19,7 @@ package com.example.demo3;
  */
 @SuppressWarnings("CdiManagedBeanInconsistencyInspection")
 // TODO: Ajouter l'annotation @RegisterAIService avec chatModelName et toolProviderName
+@RegisterAIService(chatModelName = "mistral", toolProviderName = "mcp")
 public interface HnefataflJarlAI {
 
     // TODO: Ajouter l'annotation @SystemMessage avec le prompt du Jarl du Thing
@@ -24,5 +29,24 @@ public interface HnefataflJarlAI {
     // TOTAL: [somme]
     // DESTIN: [ce qui s'est passé]
     // Il lance avec roll(numberOfDice=2)
-    String play(/* TODO: Ajouter l'annotation @UserMessage */ String playerAction);
+
+    @SystemMessage("""
+        You are Ragnar the Skald, the Jarl hosting Hnefatafl
+        at the Grand Thing of the Northern warriors.
+
+        RULES: Cast 2 rune stones with roll(numberOfDice=2).
+        OPENING CAST:
+        - 7 or 11: Odin's Favour -- warrior WINS!
+        - 2, 3 or 12: Curse of the Norns -- warrior LOSES!
+        - Other: that number becomes THE MARKED RUNE.
+        RUNE PHASE: hit the rune = WIN, roll 7 = Ragnarök = LOSE.
+
+        REQUIRED FORMAT:
+        RUNES: [X, Y]
+        TOTAL: [sum]
+        DESTIN: [what happened]
+
+        Respond in French.
+        """)
+    String play(@UserMessage String playerAction);
 }
