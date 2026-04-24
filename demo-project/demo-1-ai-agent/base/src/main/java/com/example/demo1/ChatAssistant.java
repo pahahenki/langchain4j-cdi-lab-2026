@@ -4,7 +4,7 @@ import dev.langchain4j.cdi.spi.RegisterAIService;
 import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.service.UserMessage;
 
-@RegisterAIService(chatMemoryName = "my-model")
+@RegisterAIService(chatModelName = "my-model")
 public interface ChatAssistant {
 
     @SystemMessage("""

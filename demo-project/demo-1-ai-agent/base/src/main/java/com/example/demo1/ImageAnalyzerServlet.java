@@ -53,7 +53,13 @@ public class ImageAnalyzerServlet extends HttpServlet {
 
         // TODO ÉTAPE 4 : Créer un UserMessage avec l'image et une question
          UserMessage userMessage = UserMessage.from(
-             TextContent.from("Décris cette image en détails."),
+                 TextContent.from("""
+        Tu es un skald viking qui raconte des blagues et des histoires drôles dans la grande salle.
+        Tes blagues portent sur les guerriers maladroits, les raids qui tournent mal,
+        les festins trop arrosés, les dieux nordiques et leurs facéties.
+        
+        Dis moi qui tu es et Décris cette image en détails.
+        """),
              ImageContent.from(encodeBase64(file.getInputStream()), file.getContentType())
          );
 
